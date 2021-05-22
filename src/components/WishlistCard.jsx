@@ -2,6 +2,7 @@
 //ToDo make UI Look good. 
 
 import axios from "axios";
+import { useState } from "react";
 import useMainState from "../contexts/MainContextProvider";
 import ENUMS from '../utils/enums';
 
@@ -10,10 +11,12 @@ const { SET_CART, SET_WISHLIST } = ENUMS;
 const SingleProductWishlist = ({ product }) => {
     // 0 ->  not done, 1 -> loading, 2-> successful, -1 -> failed
     const {dispatch} = useMainState();
+    const [loading, setLoading] = useState(false);
 
 
     const addToCart = async () => {
         try {
+            setLoading(true);
             const {data: wishlist} = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/wishlist/`, {
                 data : {productId: product._id} 
             })
@@ -21,10 +24,11 @@ const SingleProductWishlist = ({ product }) => {
             dispatch({type: SET_CART, data: cart});
             console.log({wishlist})
             dispatch({type: SET_WISHLIST, data: wishlist});
-            //display success
         } catch(e) {
+            // user feedback here
             console.log(e);
-            //display error
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -47,6 +51,7 @@ const SingleProductWishlist = ({ product }) => {
                 </span>
                 <br />
                 <button
+                    disabled={loading}
                     className="button button--outline-primary"
                     onClick={addToCart}
                 >

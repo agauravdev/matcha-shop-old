@@ -11,10 +11,12 @@ const { SET_CART, SET_WISHLIST } = ENUMS;
 const SingleProductCart = ({ product, quantity }) => {
     // 0 ->  not done, 1 -> loading, 2-> successful, -1 -> failed
     const [addingToWishlist, setAddingToWishlist] = useState(0);
+    const [updatingCart, setUpdatingCart] = useState(false);
     const {dispatch} = useMainState();
 
 
     const updateCart = (quantity) => {
+        setUpdatingCart(true);
         axios.post(`${process.env.REACT_APP_SERVER_URL}/cart/`, {
                 productId: product._id,
                 quantity
@@ -24,6 +26,9 @@ const SingleProductCart = ({ product, quantity }) => {
             .catch((e) => {
                 console.log(e);
                 //show error here.
+            })
+            .finally(() => {
+                setUpdatingCart(false);
             });
     };
 
@@ -38,6 +43,7 @@ const SingleProductCart = ({ product, quantity }) => {
             });
             dispatch({type: SET_WISHLIST, data: wishlist});
             dispatch({type: SET_CART, data: cart});
+            setAddingToWishlist(2);
         } 
         catch (err) {
             console.log(err);
@@ -64,6 +70,7 @@ const SingleProductCart = ({ product, quantity }) => {
                 </span>
                 <div style={{display: 'flex', flexDirection: "row", alignItems: "center", justifyContent: "center"}}>
                 <button
+                    disabled={updatingCart}
                     className="button button--primary"
                     onClick={() => {updateCart(quantity - 1)}}
                 >
@@ -71,6 +78,7 @@ const SingleProductCart = ({ product, quantity }) => {
                 </button>
                 <span style={{padding: "0 1rem"}}>{quantity}</span>
                 <button
+                    disabled={updatingCart}
                     className="button button--primary"
                     onClick={() => {updateCart(quantity + 1)}}
                 >
