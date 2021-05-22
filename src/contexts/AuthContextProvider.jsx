@@ -11,6 +11,11 @@ export const AuthContextProvider = ({ children }) => {
 
   const [user, setUser] = useState(userFromLS ? JSON.parse(userFromLS) : null);
 
+  if(user) {
+    axios.defaults.headers.common['Authorization'] = user.jwt;
+  } else {
+    delete axios.defaults.headers.common['Authorization'];
+  }
   
   const setUserAndLocalStorage = (u) => {
     if(u){
