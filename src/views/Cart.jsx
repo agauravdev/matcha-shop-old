@@ -1,5 +1,5 @@
 import useMainState from "../contexts/MainContextProvider";
-import SingleProduct from "../components/SingleProductInProductsList";
+import SingleProductCart from "../components/CartCard";
 
 const style = {
   display: "flex",
@@ -15,11 +15,12 @@ const Cart = () => {
     state: { cart },
   } = useMainState();
   
+  console.log({cart});
   return (
     <div style={style}>
       {!!cart &&
-        cart.map((product) => (
-          <SingleProduct key={product._id} product={product} />
+        cart.map((cartItem) => (
+          <SingleProductCart key={cartItem._id} product={cartItem.product} quantity={cartItem.quantity} />
         ))}
     </div>
   );

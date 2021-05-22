@@ -10,20 +10,20 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
-    const {user, setUser} = useAuth();
+    const { user, setUser } = useAuth();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(user) { 
+        if (user) {
             navigate('/products');
         }
     });
-    
-    const attemptLogin = async  () => {
+
+    const attemptLogin = async () => {
         setLoading(true);
         try {
-            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/login`, {email, password});
-            setUser({user : response.data.user, jwt : response.data.token });
+            const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/users/login`, { email, password });
+            setUser({ user: response.data.user, jwt: response.data.token });
             console.log("logged in")
         } catch (e) {
             console.log("error in logging in");
@@ -34,13 +34,14 @@ const Login = () => {
         }
     }
 
-    return <div>
-        {loading && "loading"}
-        {!!error && error }
-        <input placeholder="email" type="text" onChange={(e)=>setEmail(e.target.value)}/>
-        <input placeholder="password" type="password" onChange={(e)=>setPassword(e.target.value)}/>
-        <button onClick={attemptLogin}>Login</button>
-    </div>
+    return <>
+        <div className="login-container">
+            <input className="input" placeholder="email" type="text" onChange={(e) => setEmail(e.target.value)} />
+            <input className="input" placeholder="password" type="password" onChange={(e) => setPassword(e.target.value)} />
+            {!!error && (<small className="login-error">{error}</small>)}
+            <button className="button button--primary" onClick={attemptLogin} disabled={loading}>{loading ? "Trying Login" : "Login"}</button>
+        </div>
+    </>
 }
 
 export default Login;

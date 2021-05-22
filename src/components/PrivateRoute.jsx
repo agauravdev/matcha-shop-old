@@ -1,10 +1,13 @@
 import React from 'react';
-import {Route} from 'react-router-dom';
-import Login from '../views/Login';
+import {Route, Navigate} from 'react-router-dom';
+import useAuth from '../contexts/AuthContextProvider';
 
 
-const PrivateRoute = ({accessable, element, ...props}) => {
-    return <Route {...props} element={accessable ? element : <Login/>}/>
+const PrivateRoute = ({path, ...props}) => {
+
+    const {user} = useAuth();
+
+    return user? <Route path={path} {...props} /> : <Navigate state={{from : path}} replace to="/login"/>
 }
 
 export default PrivateRoute;

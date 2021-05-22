@@ -1,0 +1,29 @@
+.product {
+    margin: 0.5rem
+}
+
+.product p {
+    padding: 1rem 0rem;
+}
+
+.product__details {
+    margin: 0.5rem;
+}
+
+.product__image {
+    width: 100%;
+}
+
+.product .button{
+    margin: 1.5rem;
+}
+
+@media only screen and (min-width: 768px) {
+    .product {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        max-width: 100rem;
+        margin: auto;
+        margin-top: 1.5rem;
+    }
+}

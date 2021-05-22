@@ -25,6 +25,7 @@ const NavigationBar = () => {
               search: `?search=${searchTerm}`,
             }}
             className="nav--links"
+            onClick={()=>setSearch('')}
           >
             <i className="fas fa-search"></i>
           </NavLink>
@@ -41,12 +42,11 @@ const NavigationBar = () => {
             Login
           </NavLink>
         </li>)}
-        <li>
+        {/* <li>
           <NavLink to="/user" className="nav--links">
             My Profile
           </NavLink>
-        </li>
-        
+        </li> */}
       </ul>
 
       <ul
