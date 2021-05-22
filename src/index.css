@@ -1,0 +1,265 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+@import url("./matcha-ui.css");
+
+html, body, #root {
+    min-height: 100%;
+    height: 100%;
+}
+
+.main--panel {
+    height: 100%;
+}
+
+/* Navbar */
+.navbar {
+    font-size: 1.25rem;
+    background-color: var(--primary-color);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 0.5rem;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,.25);
+    display: grid;
+    grid-template-areas: "toggle logo nav--secondary"
+                         "nav--main nav--main nav--main";
+    /* grid-template-columns: 3rem auto auto; */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav--logo {
+    grid-area: logo;
+}
+
+.nav--main {
+    grid-area: nav--main;
+}
+
+.nav--secondary {
+    grid-area: nav--secondary;
+}
+
+.nav--main li {
+    text-align: center;
+    margin: 1rem auto;
+}
+
+.nav--secondary li {
+    text-align: center;
+    margin: 0.6rem 0.5rem;
+}
+
+.nav--logo {
+    display: inline-block;
+    font-size: 1.5rem;
+    margin-top: 0.5rem;
+    margin-left: 1.25rem;
+}
+
+.nav--links:focus {
+    outline: none;
+}
+
+.nav--links:visited {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.nav--links, .nav--logo {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.navbar--toggle {
+    border: none;
+    background: transparent;
+    margin-left: 1rem;
+    margin-top: 0.5rem;
+    cursor: pointer; 
+    color: rgba(255,255,255,0.8);
+    font-size: 1.5rem;
+    grid-area: toggle;
+}
+
+.nav--main {
+    list-style-type: none;
+    display: none;
+}
+
+.nav--main.active {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.nav--search {
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    border: 0px;
+    height: 1.1rem;
+    align-self: center;
+    margin-right: 1rem;
+    padding: 0.25rem
+}
+/* End Navbar */
+
+.container {
+    height: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.App {
+    text-align: center;
+    height: 100%;
+}
+
+.App-header {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+
+*:focus-visible {
+    outline: 0;
+    box-shadow: 0 0 0 1px var(--primary-color-dark);
+}
+
+.nav--primary {
+    align-items: center;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    margin: 1rem
+}
+
+.button:disabled {
+    background-color: grey;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container{
+    max-width: 30rem;
+    height: 100%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-error {
+    color: red;
+}
+
+.login-container .input {
+    margin-bottom: 1rem;
+}
+
+.input {
+    width: 100%;
+    display: block;
+    padding: 0.5rem;
+    border: 1px solid #d4d5d9;
+    border-radius: 0.3rem;
+    line-height: 1.5;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.home {
+  background: linear-gradient(-45deg, #ee7752, #23a6d5, #23d5ab);
+	background-size: 400% 400%;
+	animation: gradient 15s ease infinite;
+  
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.home--heading {
+    font-weight: 400;
+    padding: 1rem 0;
+}
+
+.home--tagline {
+    font-weight: 400;
+    padding: 0 0 1rem 0;
+}
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+@media screen and (min-width: 768px) {
+
+    .navbar {
+        display: grid;
+        padding-bottom: 0;
+        height: 70px;
+        align-items: center;
+        grid-template-columns: 10rem auto min-content;
+        justify-content: initial;
+        grid-template-areas: "logo nav--main nav--secondary";
+    }
+
+    .nav--main {
+        display: flex;
+        margin-right: 30px;
+        flex-direction: row;
+        justify-content: flex-start;
+        padding-left: 2rem;
+        gap: 1rem;
+    }
+    .nav--main li {
+        margin: 0;
+    }
+
+    .nav--logo {
+        margin-top: 0;
+    }
+
+   .navbar--toggle {
+       display: none;
+    }
+
+    .nav--logo:hover,
+    .nav--links:hover {
+        color: rgba(255, 255, 255, 1);
+    }
+}
